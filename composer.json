@@ -1,0 +1,6 @@
+{
+    "name": "chayakornc/php-aes",
+    "autoload": {
+        "files": ["src/AES.php"]
+    }
+}
