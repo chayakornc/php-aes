@@ -1,7 +1,7 @@
 {
     "name": "chayakornc/php-aes",
     "require": {
-    	"ext-mcrypt": "*",
+    	"ext-mcrypt": "*"
     },
     "autoload": {
         "files": ["src/AES.php"]
