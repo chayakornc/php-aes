@@ -149,7 +149,7 @@ class Crypt_AES extends Crypt_Rijndael {
      * @return Crypt_AES
      * @access public
      */
-    function __construct($mode = CRYPT_AES_MODE_CBC)
+    public function __construct($mode = CRYPT_AES_MODE_CBC)
     {
         if ( !defined('CRYPT_AES_MODE') ) {
             switch (true) {
@@ -210,7 +210,7 @@ class Crypt_AES extends Crypt_Rijndael {
      * @access public
      * @param Integer $length
      */
-    function setBlockLength($length)
+    public function setBlockLength($length)
     {
         return;
     }
@@ -232,7 +232,7 @@ class Crypt_AES extends Crypt_Rijndael {
      * @access public
      * @param String $plaintext
      */
-    function encrypt($plaintext)
+    public function encrypt($plaintext)
     {
         if ( CRYPT_AES_MODE == CRYPT_AES_MODE_MCRYPT ) {
             $this->_mcryptSetup();
@@ -273,7 +273,7 @@ class Crypt_AES extends Crypt_Rijndael {
      * @access public
      * @param String $ciphertext
      */
-    function decrypt($ciphertext)
+    public function decrypt($ciphertext)
     {
         if ( CRYPT_AES_MODE == CRYPT_AES_MODE_MCRYPT ) {
             $this->_mcryptSetup();
@@ -314,7 +314,7 @@ class Crypt_AES extends Crypt_Rijndael {
      *
      * @access private
      */
-    function _mcryptSetup()
+    private function _mcryptSetup()
     {
         if (!$this->changed) {
             return;
@@ -372,7 +372,7 @@ class Crypt_AES extends Crypt_Rijndael {
      * @param String $in
      * @return String
      */
-    function _encryptBlock($in)
+    private function _encryptBlock($in)
     {
         $state = unpack('N*word', $in);
 
@@ -433,7 +433,7 @@ class Crypt_AES extends Crypt_Rijndael {
      * @param String $in
      * @return String
      */
-    function _decryptBlock($in)
+    private function _decryptBlock($in)
     {
         $state = unpack('N*word', $in);
 

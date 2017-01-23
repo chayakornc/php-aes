@@ -366,7 +366,7 @@ class Crypt_Rijndael {
      * @return Crypt_Rijndael
      * @access public
      */
-    function __construct($mode = CRYPT_RIJNDAEL_MODE_CBC)
+    public function __construct($mode = CRYPT_RIJNDAEL_MODE_CBC)
     {
         switch ($mode) {
             case CRYPT_RIJNDAEL_MODE_ECB:
@@ -485,7 +485,7 @@ class Crypt_Rijndael {
      * @access public
      * @param String $key
      */
-    function setKey($key)
+    public function setKey($key)
     {
         $this->key = $key;
         $this->changed = true;
@@ -500,7 +500,7 @@ class Crypt_Rijndael {
      * @access public
      * @param String $iv
      */
-    function setIV($iv)
+    public function setIV($iv)
     {
         $this->encryptIV = $this->decryptIV = $this->iv = str_pad(substr($iv, 0, $this->block_size), $this->block_size, chr(0));;
     }
@@ -514,7 +514,7 @@ class Crypt_Rijndael {
      * @access public
      * @param Integer $length
      */
-    function setKeyLength($length)
+    public function setKeyLength($length)
     {
         $length >>= 5;
         if ($length > 8) {
@@ -538,7 +538,7 @@ class Crypt_Rijndael {
      * @access public
      * @param Integer $length
      */
-    function setBlockLength($length)
+    public function setBlockLength($length)
     {
         $length >>= 5;
         if ($length > 8) {
@@ -559,11 +559,11 @@ class Crypt_Rijndael {
      *
      * @see Crypt_Rijndael::decrypt()
      * @see Crypt_Rijndael::encrypt()
-     * @access public
+     * @access protected
      * @param Integer $length
      * @param String $iv
      */
-    function _generate_xor($length, &$iv)
+    protected function _generate_xor($length, &$iv)
     {
         $xor = '';
         $block_size = $this->block_size;
@@ -608,7 +608,7 @@ class Crypt_Rijndael {
      * @access public
      * @param String $plaintext
      */
-    function encrypt($plaintext)
+    public function encrypt($plaintext)
     {
         $this->_setup();
         if ($this->mode != CRYPT_RIJNDAEL_MODE_CTR) {
@@ -660,7 +660,7 @@ class Crypt_Rijndael {
      * @access public
      * @param String $ciphertext
      */
-    function decrypt($ciphertext)
+    public function decrypt($ciphertext)
     {
         $this->_setup();
 
@@ -711,7 +711,7 @@ class Crypt_Rijndael {
      * @param String $in
      * @return String
      */
-    function _encryptBlock($in)
+    private function _encryptBlock($in)
     {
         $state = array();
         $words = unpack('N*word', $in);
@@ -798,7 +798,7 @@ class Crypt_Rijndael {
      * @param String $in
      * @return String
      */
-    function _decryptBlock($in)
+    private function _decryptBlock($in)
     {
         $state = array();
         $words = unpack('N*word', $in);
@@ -876,7 +876,7 @@ class Crypt_Rijndael {
      *
      * @access private
      */
-    function _setup()
+    private function _setup()
     {
         // Each number in $rcon is equal to the previous number multiplied by two in Rijndael's finite field.
         // See http://en.wikipedia.org/wiki/Finite_field_arithmetic#Multiplicative_inverse
@@ -990,7 +990,7 @@ class Crypt_Rijndael {
      *
      * @access private
      */
-    function _subWord($word)
+    private function _subWord($word)
     {
         static $sbox0, $sbox1, $sbox2, $sbox3;
 
@@ -1036,7 +1036,7 @@ class Crypt_Rijndael {
      *
      * @access private
      */
-    function _invSubWord($word)
+    private function _invSubWord($word)
     {
         static $sbox0, $sbox1, $sbox2, $sbox3;
 
@@ -1092,7 +1092,7 @@ class Crypt_Rijndael {
      * @see Crypt_Rijndael::disablePadding()
      * @access public
      */
-    function enablePadding()
+    public function enablePadding()
     {
         $this->padding = true;
     }
@@ -1103,7 +1103,7 @@ class Crypt_Rijndael {
      * @see Crypt_Rijndael::enablePadding()
      * @access public
      */
-    function disablePadding()
+    public function disablePadding()
     {
         $this->padding = false;
     }
@@ -1121,7 +1121,7 @@ class Crypt_Rijndael {
      * @see Crypt_Rijndael::_unpad()
      * @access private
      */
-    function _pad($text)
+    private function _pad($text)
     {
         $length = strlen($text);
 
@@ -1148,7 +1148,7 @@ class Crypt_Rijndael {
      * @see Crypt_Rijndael::_pad()
      * @access private
      */
-    function _unpad($text)
+    private function _unpad($text)
     {
         if (!$this->padding) {
             return $text;
@@ -1200,7 +1200,7 @@ class Crypt_Rijndael {
      * @see Crypt_Rijndael::disableContinuousBuffer()
      * @access public
      */
-    function enableContinuousBuffer()
+    public function enableContinuousBuffer()
     {
         $this->continuousBuffer = true;
     }
@@ -1213,7 +1213,7 @@ class Crypt_Rijndael {
      * @see Crypt_Rijndael::enableContinuousBuffer()
      * @access public
      */
-    function disableContinuousBuffer()
+    public function disableContinuousBuffer()
     {
         $this->continuousBuffer = false;
         $this->encryptIV = $this->iv;
@@ -1230,7 +1230,7 @@ class Crypt_Rijndael {
      * @return String
      * @access private
      */
-    function _string_shift(&$string, $index = 1)
+    private function _string_shift(&$string, $index = 1)
     {
         $substr = substr($string, 0, $index);
         $string = substr($string, $index);
