@@ -707,11 +707,11 @@ class Crypt_Rijndael {
     /**
      * Encrypts a block
      *
-     * @access private
+     * @access protected
      * @param String $in
      * @return String
      */
-    private function _encryptBlock($in)
+    protected function _encryptBlock($in)
     {
         $state = array();
         $words = unpack('N*word', $in);
@@ -794,11 +794,11 @@ class Crypt_Rijndael {
     /**
      * Decrypts a block
      *
-     * @access private
+     * @access protected
      * @param String $in
      * @return String
      */
-    private function _decryptBlock($in)
+    protected function _decryptBlock($in)
     {
         $state = array();
         $words = unpack('N*word', $in);
@@ -988,9 +988,9 @@ class Crypt_Rijndael {
     /**
      * Performs S-Box substitutions
      *
-     * @access private
+     * @access protected
      */
-    private function _subWord($word)
+    protected function _subWord($word)
     {
         static $sbox0, $sbox1, $sbox2, $sbox3;
 
@@ -1034,9 +1034,9 @@ class Crypt_Rijndael {
     /**
      * Performs inverse S-Box substitutions
      *
-     * @access private
+     * @access protected
      */
-    private function _invSubWord($word)
+    protected function _invSubWord($word)
     {
         static $sbox0, $sbox1, $sbox2, $sbox3;
 
@@ -1119,9 +1119,9 @@ class Crypt_Rijndael {
      * and padding will, hence forth, be enabled.
      *
      * @see Crypt_Rijndael::_unpad()
-     * @access private
+     * @access protected
      */
-    private function _pad($text)
+    protected function _pad($text)
     {
         $length = strlen($text);
 
@@ -1146,9 +1146,9 @@ class Crypt_Rijndael {
      * and false will be returned.
      *
      * @see Crypt_Rijndael::_pad()
-     * @access private
+     * @access protected
      */
-    private function _unpad($text)
+    protected function _unpad($text)
     {
         if (!$this->padding) {
             return $text;
