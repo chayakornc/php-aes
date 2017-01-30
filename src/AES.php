@@ -368,11 +368,11 @@ class Crypt_AES extends Crypt_Rijndael {
      * Optimized over Crypt_Rijndael's implementation by means of loop unrolling.
      *
      * @see Crypt_Rijndael::_encryptBlock()
-     * @access private
+     * @access protected
      * @param String $in
      * @return String
      */
-    private function _encryptBlock($in)
+    protected function _encryptBlock($in)
     {
         $state = unpack('N*word', $in);
 
@@ -429,11 +429,11 @@ class Crypt_AES extends Crypt_Rijndael {
      * Optimized over Crypt_Rijndael's implementation by means of loop unrolling.
      *
      * @see Crypt_Rijndael::_decryptBlock()
-     * @access private
+     * @access protected
      * @param String $in
      * @return String
      */
-    private function _decryptBlock($in)
+    protected function _decryptBlock($in)
     {
         $state = unpack('N*word', $in);
 
